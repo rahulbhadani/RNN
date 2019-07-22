@@ -15,10 +15,12 @@ import os
 import time
 from datetime import datetime
 from RNN import RNN
+from RNN import train_with_sgd
 import rnn_utils
+from RNN import generate_sentence
 
 nltk.download('punkt')
-vocabulary_size = 8000
+vocabulary_size = 3000
 unknown_token = "UNKNOWN_TOKEN"
 sentence_start_token = "SENTENCE_START"
 sentence_end_token = "SENTENCE_END"
@@ -27,7 +29,7 @@ sentence_end_token = "SENTENCE_END"
 # CSV File can be downloaed from 
     # https://github.com/dennybritz/rnn-tutorial-rnnlm/blob/master/data/reddit-comments-2015-08.csv
 print("Reading CSV file...")
-with open('/home/ivory/VersionControl/Jmsgroup/trunk/rahulbhadani/MetaLearning/Code/RNN/reddit.csv', 'r', encoding="utf-8") as f:
+with open('/home/ivory/VersionControl/RNN/reddit.csv', 'r', encoding="utf-8") as f:
     reader = csv.reader(f, skipinitialspace=True)
     # Split full comments into sentences
     sentences = itertools.chain(*[nltk.sent_tokenize(x[0].lower()) for x in reader])
@@ -67,3 +69,29 @@ print(o)
 predictions = model.predict(X_train[10])
 print(predictions.shape)
 print(predictions)
+
+print("-------------------------------------------")
+'''
+Cross Entropy loss is L(y, o) = -\cfrac{1}{N}\sum_{n\in N} y_n \log o_n
+'''
+E_loss = np.log(vocabulary_size)
+print('Expected loss for random predictions is {}'.format(E_loss))
+
+Actual_loos = model.calc_loss(X_train[:1000], y_train[:1000])
+print('Actual loss for random predictions is {}'.format(Actual_loos))
+
+losses = train_with_sgd(model, X_train[:100], y_train[:100], nepoch=10, evaluate_loss_after=1)
+
+ 
+
+### Lets generate the text now
+num_sentences = 10
+senten_min_length = 7
+
+for i in range(num_sentences):
+    sent = []
+
+    while len(sent) < senten_min_length:
+        sent = generate_sentence(model, word_to_index, index_to_word,
+             sentence_start_token, sentence_end_token, unknown_token)
+    print (' '.join(sent))
