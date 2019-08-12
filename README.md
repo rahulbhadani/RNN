@@ -1,7 +1,14 @@
-## RNN
-Recurrent Neural Network Implementation based on WildML's tutorial
+## RNN, LSTM and PyTorch
+
+
+## Recurrent Neural Network Implementation based on WildML's tutorial
 -------------------------------------------------------------------
-This repository provides an implementation of Recurrent Neural Network based on tutorial [http://www.wildml.com/2015/09/recurrent-neural-networks-tutorial-part-2-implementing-a-language-model-rnn-with-python-numpy-and-theano/](http://www.wildml.com/2015/09/recurrent-neural-networks-tutorial-part-2-implementing-a-language-model-rnn-with-python-numpy-and-theano/).
+The repository provides an implementation of Recurrent Neural Network based on tutorial [http://www.wildml.com/2015/09/recurrent-neural-networks-tutorial-part-2-implementing-a-language-model-rnn-with-python-numpy-and-theano/](http://www.wildml.com/2015/09/recurrent-neural-networks-tutorial-part-2-implementing-a-language-model-rnn-with-python-numpy-and-theano/).
+
+Relevant files are:
+- RNN.py
+- RNN_impl.py
+- rnn_utils.py
 
 The code has been written in the form of the package that can be used with `import` command.
 
@@ -35,5 +42,17 @@ export THEANO_FLAGS=mode=FAST_RUN,device=gpu,floatX=float32
 export CUDA_LAUNCH_BLOCKING=1
 ```
 
+## Long Short-term Memory
+----------------------
 
+An example code is given to predict crypto currency exchange rate using LSTM. 
+
+Relevant file(s):
+crypt_lstm.py
+
+## Using PyTorch for LSTM, Seq2Seq Model
+----------------------------------------
+
+
+A Juypter Notebook `PyTorch_1.ipynb` follows the tutorial from YouTube tutorial [Applied Deep Learning with PyTorch](https://www.youtube.com/watch?v=CNuI8OWsppg&t=19761s) to demonstrate the use of PyTorch to implement Seq2Seq Model.
 
